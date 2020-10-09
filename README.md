@@ -7,7 +7,7 @@ A python + luma.oled base OS for smart glasses
 
 ## Setup Linux
 + Install python3 and python3-pip
-+ Run '''bash sudo pip3 install keyboard
++ Run '''bash sudo pip3 install keyboard'''
 
 ## App Requirements
 + an init() method and an update()  method
