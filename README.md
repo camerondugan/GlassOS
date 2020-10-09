@@ -20,9 +20,6 @@ A python + luma.oled base OS for smart glasses with an ssd1331 oled display on r
 + Required to emulation: ```sudo pip3 install luma.emulator```
 + To emulate:
 	+ ```sudo python3 glassOS.py -i spi -d pygame --width 96 --height 64```
-### Known Issues with Emulation
-+ Closing apps closes the emulator
-
 
 ## Using the OS
 + arrow keys to switch apps
