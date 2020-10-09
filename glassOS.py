@@ -29,7 +29,7 @@ def init():
     #setup input
     keyboard.on_press_key("left", lambda _:previousApp())
     keyboard.on_press_key("right", lambda _:nextApp())
-    keyboard.on_press_key("esc", lambda _:onEscape())
+    keyboard.add_hotkey("ctrl+1", lambda :onEscape())
     keyboard.on_press_key("enter", lambda _:onEnter())
     
 def main():
