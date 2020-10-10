@@ -29,10 +29,8 @@ def init():
     #setup input
     keyboard.on_press_key("left", lambda _:previousApp())
     keyboard.on_press_key("right", lambda _:nextApp())
-    keyboard.add_hotkey("ctrl+1", lambda :onEscape()) #alternate hotkey
-    keyboard.add_hotkey("esc", lambda :onEscape())
-    keyboard.add_hotkey("ctrl+1", lambda :onEscape()) #alternate hotkey
-
+    keyboard.on_press_key("esc", lambda _:onEscape())
+    keyboard.on_press_key("enter", lambda _:onEnter())
     
 def main():
     global appNames
