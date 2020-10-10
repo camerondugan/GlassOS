@@ -40,11 +40,10 @@ def update():
     if (round(runTime) / (refreshInMin*60) >= 1):
         covidCode = getCovidCode()
         startTime = time.time()
-    isTime = (runTime) % 10
-    if (isTime > 0 and isTime < 0.05):
-        term.println(covidCases + " cases at")
-        term.println("Wentworth")
-        term.println(covidCode)
+    term.println(covidCases + " cases at")
+    term.println("Wentworth")
+    term.println(covidCode)
+    time.sleep(1)
     
 def getCovidCases():
     source = requests.get('https://wit.edu/re-entry/dashboard').text

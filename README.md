@@ -36,7 +36,8 @@ A python + luma.oled base OS for smart glasses with an ssd1331 oled display on r
 ## Using the OS
 + arrow keys to switch apps
 + enter key to enter
-+ press ctrl+1 to exit
++ press the escape key to exit
++ If you are running the elumator use ctrl+1 to exit
 
 ## DIY Python App Requirements
 + an init() method and an update() method
