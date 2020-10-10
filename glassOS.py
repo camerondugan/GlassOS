@@ -1,5 +1,6 @@
 import os
 import sys
+sys.path.append('apps')
 import time
 import random
 import keyboard
@@ -51,7 +52,7 @@ def displayText(text):
 
 def getApps():
     appNames = []
-    for entry in os.listdir():
+    for entry in os.listdir(path='apps'):
         if (entry.endswith(".py")
         and(not entry.startswith("camera")
         and entry != "glassOS.py"
