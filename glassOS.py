@@ -31,6 +31,7 @@ def init():
     keyboard.on_press_key("right", lambda _:nextApp())
     keyboard.on_press_key("esc", lambda _:onEscape())
     keyboard.on_press_key("enter", lambda _:onEnter())
+    keyboard.add_hotkey('space', lambda:onEscape())
     
 def main():
     global appNames
