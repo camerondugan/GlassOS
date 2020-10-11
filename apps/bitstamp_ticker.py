@@ -67,7 +67,7 @@ def show_price(device):
 
 def update():
     show_price(device)
-    time.sleep(5)
+    time.sleep(3)
 
 def init():
     pass

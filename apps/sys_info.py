@@ -103,7 +103,7 @@ def init():
 
 def update():
     stats(device)
-    time.sleep(5)
+    time.sleep(3)
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ A python + luma.oled base OS for smart glasses with an ssd1331 oled display on r
 + Clone this repository with git bash or github desktop and open the folder in file explorer
 + Open the Windows folder and double click get-pip.py to install pip for python
 	+ If this doesn't work, you can also get it from https://bootstrap.pypa.io/get-pip.py
-+ Go back to cmd and type ```pip install lxml bs4 requests pygame luma.oled luma.emulator keyboard```
++ Go back to cmd and type ```pip install lxml bs4 requests pygame luma.oled luma.emulator keyboard psutil feedparser```
 + to run the os go to this folder in cmd and run ```python glassOS.py -d pygame --width 96 --height 64```
 
 ## Setup Linux Debian/Ubuntu+
@@ -17,9 +17,9 @@ A python + luma.oled base OS for smart glasses with an ssd1331 oled display on r
 + Clone over https into a folder where you will remember it
 + Install python3 and python3-pip: ```sudo apt install python3 python3-pip```
 + Install extra dependencies ```sudo apt install python3-pil libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libopenjp2-7 libtiff5 -y```
-+ Install app dependencies ```sudo pip3 intall lxml bs4 requests```
++ Install app dependencies ```sudo pip3 intall lxml bs4 requests keyboard luma.oled psutil feedparser```
 + Install keyboard for super user in python3: ```sudo pip3 install keyboard```
-+ Install Luma for super user also in python3: ```sudo -H pip3 install luma.oled```
++ Install Luma for super user also in python3: ```sudo pip3 install luma.oled```
 
 ## Running The OS
 + Open the folder in a terminal

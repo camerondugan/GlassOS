@@ -16,10 +16,13 @@ from PIL import Image
 
 global img_path
 global balloon
+global mode
 
 def init():
     global balloon
     global img_path
+    global mode
+    global startTime
     
     img_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
         'images', 'balloon.png'))
@@ -27,36 +30,40 @@ def init():
         .transform(device.size, Image.AFFINE, (1, 0, 0, 0, 1, 0), Image.BILINEAR) \
         .convert("L") \
         .convert(device.mode)
+    mode = 0
+    startTime = time.time()
 
 def update():
     global balloon
     global img_path
+    global mode
+    global startTime
     
-    # Image display
-    device.display(balloon)
-    device.display(balloon)
-    time.sleep(5)
+    if (mode == 0):
+        # Image display
+        device.display(balloon)
+        device.display(balloon)
 
-    # Greyscale
-    shades = 16
-    w = device.width / shades
-    for _ in range(2):
-        with canvas(device, dither=True) as draw:
-            for i, color in enumerate(range(0, 256, shades)):
-                rgb = (color << 16) | (color << 8) | color
-                draw.rectangle((i * w, 0, (i + 1) * w, device.height), fill=rgb)
-
-            size = draw.textsize("greyscale")
-            left = (device.width - size[0]) // 2
-            top = (device.height - size[1]) // 2
-            right = left + size[0]
-            bottom = top + size[1]
-            draw.rectangle((left - 1, top, right, bottom), fill="black")
-            draw.rectangle(device.bounding_box, outline="white")
-            draw.text((left, top), text="greyscale", fill="white")
-
-    time.sleep(5)
-
+    if (mode == 1):
+        # Greyscale
+        shades = 16
+        w = device.width / shades
+        for _ in range(2):
+            with canvas(device, dither=True) as draw:
+                for i, color in enumerate(range(0, 256, shades)):
+                    rgb = (color << 16) | (color << 8) | color
+                    draw.rectangle((i * w, 0, (i + 1) * w, device.height), fill=rgb)
+    
+                size = draw.textsize("greyscale")
+                left = (device.width - size[0]) // 2
+                top = (device.height - size[1]) // 2
+                right = left + size[0]
+                bottom = top + size[1]
+                draw.rectangle((left - 1, top, right, bottom), fill="black")
+                draw.rectangle(device.bounding_box, outline="white")
+                draw.text((left, top), text="greyscale", fill="white")
+    mode = time.time() - startTime
+    mode %= 2
 
 if __name__ == "__main__":
     try:

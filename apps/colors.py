@@ -40,7 +40,7 @@ def update():
     # Image display
     if (mode == 0):
         device.display(balloon)
-        time.sleep(5)
+        time.sleep(3)
 
     # Cycle through some primary colours
     if (mode == 1):
@@ -74,7 +74,7 @@ def update():
             bottom = top + size[1]
             draw.rectangle((left - 1, top, right, bottom), fill="black")
             draw.text((left, top), text="rainbow", fill="white")
-        time.sleep(5)
+        time.sleep(3)
 
     # Gradient
     if (mode == 3):

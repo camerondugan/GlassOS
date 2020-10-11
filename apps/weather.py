@@ -72,7 +72,6 @@ def update():
     msg = msg.split(",")[0]
     term.puts(msg)
     term.newline()
-    time.sleep(2)
 
     #print("{}: {}".format(im,(im+1)%3))
     msg = items["description"].split(",")[im]

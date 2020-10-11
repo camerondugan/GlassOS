@@ -56,9 +56,15 @@ def scroll_left(virtual, pos):
     return (x, y)
 
 global images
+global mode
+global pos
+global virtual
 
 def init():
     global images
+    global mode 
+    global pos
+    global virtual
     
     images = [
         "pixelart1.png",
@@ -67,8 +73,8 @@ def init():
         "pixelart4.jpg",
         "pixelart5.jpg"
     ]
-
-def update():
+    mode = 0
+    pos = (0, 0)
     img_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
         'images', random.choice(images)))
     pixel_art = Image.open(img_path).convert(device.mode)
@@ -78,17 +84,21 @@ def update():
 
     virtual.display(pixel_art)
 
-    time.sleep(2)
+def update():
+    global mode
+    global pos
+    global virtual
 
-    pos = (0, 0)
-    pos = scroll_down(virtual, pos)
-    time.sleep(2)
-    pos = scroll_right(virtual, pos)
-    time.sleep(2)
-    pos = scroll_up(virtual, pos)
-    time.sleep(2)
-    pos = scroll_left(virtual, pos)
-    time.sleep(2)
+    if (mode == 0):
+        pos = scroll_down(virtual, pos)
+    if (mode == 1):
+        pos = scroll_right(virtual, pos)
+    if (mode == 2):
+        pos = scroll_up(virtual, pos)
+    if (mode == 3):
+        pos = scroll_left(virtual, pos)
+    mode += 1
+    mode %= 4
 
 
 if __name__ == "__main__":

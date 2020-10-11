@@ -8,7 +8,7 @@ from demo_opts import get_device
 from luma.core.render import canvas
 
 global running
-global app_names
+global appNames
 global apps
 global curApp
 global switched
