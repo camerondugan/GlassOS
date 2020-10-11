@@ -48,6 +48,8 @@ def get_device(actual_args=None):
     """
     if actual_args is None:
         actual_args = sys.argv[1:]
+        if len(actual_args) == 0:
+            actual_args = ["-i","spi","-d","pygame","--width", "96","--height","64"]
     parser = cmdline.create_parser(description='luma.examples arguments')
     args = parser.parse_args(actual_args)
 
