@@ -11,9 +11,9 @@ global running
 global appNames
 global apps
 global curApp
-global switched
+global changedApp
 global backupDevice
-switched = True
+changedApp = True
 
 def init():
     global appNames
@@ -71,32 +71,37 @@ def importApps():
         except:
             print("import of app: ." + appName + ". FAILED")
 
+def runApp(appName):
+    apps[appName].device = device
+    apps[appName].init()
+    while(running):
+        apps[appName].update()
+
 def nextApp():
     global curApp
-    global switched
+    global changedApp
     if not running:
         curApp = (curApp + 1)%len(appNames)
-        switched = True    
+        changedApp = True    
 
 def previousApp():
     global curApp
-    global switched
+    global changedApp
     if not running:
         curApp -= 1
         if curApp < 0:
             curApp = len(appNames) - 1
-        switched = True
+        changedApp = True
     
 def playCurrent():
     global curApp
-    global switched
+    global changedApp
     
-    appName = appNames[curApp]
-    if switched:
+    if changedApp:
         appName = appNames[curApp]
         resetDisplay()
         displayText(appName)
-        switched = False
+        changedApp = False
     elif (running):
         apps[appName].update()
     
@@ -113,29 +118,14 @@ def onEnter():
 
 def onEscape():
     global running
-    global switched
+    global changedApp
     global device
-    if not switched:
+    if not changedApp:
         running = False
         device.clear()
         displayText("Closing...")
-        switched = True
+        changedApp = True
     
-def playAll():
-    random.shuffle(appNames)
-    for appName in appNames:
-        count = 0
-        apps[appName].device = device
-        apps[appName].init()
-        displayText(appName.capitalize())
-        time.sleep(1.8)
-        start = time.time()
-        print("Running: " + appName)
-        while (time.time() - start < 5):
-            apps[appName].update()
-        print("Closed: " + appName)
-        resetDisplay()
-
 def resetDisplay():
     global device
     device.cleanup()

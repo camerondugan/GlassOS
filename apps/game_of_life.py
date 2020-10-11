@@ -42,48 +42,55 @@ global scale
 global cols
 global rows
 global initial_population
+global i
+
+def draw(board):
+    global i
+    with canvas(device, dither=True) as draw:
+        for x, y in board:
+            left = x * scale
+            top = y * scale
+            if scale == 1:
+                draw.point((left, top), fill="white")
+            else:
+                right = left + scale
+                bottom = top + scale
+                draw.rectangle((left, top, right, bottom), fill="white", outline="black")
+    if i >= 500:
+        init()
+        i -= 1
+    i += 1
 
 def init():
     global scale
     global cols
     global rows
     global initial_population
+    global i
+    global board
+    i = 0
     scale = 3
     cols = device.width // scale
     rows = device.height // scale
     initial_population = int(cols * rows * 0.33)
+    board = set((randint(0, cols), randint(0, rows)) for _ in range(initial_population))
+    with canvas(device, dither=True) as draws:
+        w, h = draws.textsize("Game of Life")
+        left = (device.width - w) // 2
+        top = (device.height - h) // 2
+        draws.rectangle((left - 1, top, left + w + 1, top + h), fill="black", outline="white")
+        draws.text((left + 1, top), text="Game of Life", fill="white")
+    time.sleep(3)
 
 def update():
+    global board
     global scale
     global cols
     global rows
     global initial_population
     
-    board = set((randint(0, cols), randint(0, rows)) for _ in range(initial_population))
-
-    for i in range(500):
-        with canvas(device, dither=True) as draw:
-            for x, y in board:
-                left = x * scale
-                top = y * scale
-                if scale == 1:
-                    draw.point((left, top), fill="white")
-                else:
-                    right = left + scale
-                    bottom = top + scale
-                    draw.rectangle((left, top, right, bottom), fill="white", outline="black")
-
-            if i == 0:
-                w, h = draw.textsize("Game of Life")
-                left = (device.width - w) // 2
-                top = (device.height - h) // 2
-                draw.rectangle((left - 1, top, left + w + 1, top + h), fill="black", outline="white")
-                draw.text((left + 1, top), text="Game of Life", fill="white")
-
-        if i == 0:
-            time.sleep(3)
-
-        board = iterate(board)
+    draw(board)
+    board = iterate(board)
 
 
 if __name__ == "__main__":

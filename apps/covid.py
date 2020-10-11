@@ -19,10 +19,10 @@ def init():
     global covidCases
     global refreshInMin
     global startTime
+    global covidCode
     term = terminal(device, make_font("pixelmix.ttf",12))
     term.println("Loading...")
     covidCases = getCovidCases()
-    global covidCode
     covidCode = getCovidCode()
     refreshInMin = 10
     startTime = time.time()
