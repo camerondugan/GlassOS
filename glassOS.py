@@ -103,6 +103,7 @@ def playCurrent():
         displayText(appName)
         changedApp = False
     elif (running):
+        appName = appNames[curApp]
         apps[appName].update()
     
 
