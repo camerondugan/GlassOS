@@ -9,18 +9,18 @@ def test_nothing():
 
 def test_displayText():
     try:
-        glassOS.device = get_device()
-        glassOS.displayText("pineapple")
+        os = glassOS.OS(get_device())
+        os.displayText("pineapple")
         assert True, "display said pineapple"
     except Exception as e:
         assert False, "{}: {}".format(type(e),e)
 
 def test_appUpdateTime():
-    glassOS.device = get_device()
-    glassOS.init()
-    for app in glassOS.appNames:
-        curApp = glassOS.apps[app]
-        curApp.device = glassOS.device
+    os = glassOS.OS(get_device())
+    os.startUp()
+    for app in os.appNames:
+        curApp = os.apps[app]
+        curApp.device = os.device
         curApp.init()
         startTime = time.time()
         curApp.update()
