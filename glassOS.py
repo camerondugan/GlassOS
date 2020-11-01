@@ -20,13 +20,17 @@ class OS:
         os.apps = sys.modules
         os.running = False
         os.curApp = 0
+        os.count = 0
         
         #setup input
-        keyboard.on_press_key("left", lambda _:previousApp())
-        keyboard.on_press_key("right", lambda _:nextApp())
-        keyboard.on_press_key("esc", lambda _:onEscape())
-        keyboard.on_press_key("enter", lambda _:onEnter())
-        keyboard.add_hotkey('space', lambda :onEscape())
+        keyboard.on_press_key("left", lambda _:os.previousApp())
+        keyboard.on_press_key("right", lambda _:os.nextApp())
+        keyboard.on_press_key("esc", lambda _:os.onEscape())
+        keyboard.on_press_key("enter", lambda _:os.onEnter())
+        keyboard.add_hotkey('space', lambda :os.onEscape())
+    
+    def update(os):
+        os.playCurrentApp()
 
     def displayText(os,text):
         os.device.clear()
@@ -50,62 +54,60 @@ class OS:
         appNames = []
         for entry in linux.listdir(path='apps'):
             if (entry.endswith(".py")
-            and(not entry.startswith("camera")
             and entry != "glassOS.py"
             and entry != 'app.py'
-            and entry != 'demo_opts.py')):
+            and entry != 'demo_opts.py'):
                 appNames.append(entry[:-3])
         return appNames
 
     def runAnApp(os,appName):
-        apps[appName].device = device
-        apps[appName].init()
-        while(running):
-            apps[appName].update()
+        os.apps[appName].device = os.device
+        os.apps[appName].init()
+        while(os.running):
+            os.apps[appName].update()
 
     def nextApp(os):
-        if not running:
-            curApp = (curApp + 1)%len(appNames)
-            changedApp = True    
+        if not os.running:
+            os.curApp = (os.curApp + 1)%len(os.appNames)
+            os.changedApp = True    
 
     def previousApp(os):
-        if not running:
-            curApp -= 1
-            if curApp < 0:
-                curApp = len(appNames) - 1
-            changedApp = True
+        if not os.running:
+            os.curApp -= 1
+            if os.curApp < 0:
+                os.curApp = len(os.appNames) - 1
+            os.changedApp = True
         
     def playCurrentApp(os):
-        if changedApp:
-            appName = appNames[curApp]
-            resetDisplay()
-            displayText(appName)
-            changedApp = False
-        elif (running):
-            appName = appNames[curApp]
-            apps[appName].update()
+        if os.changedApp:
+            appName = os.appNames[os.curApp]
+            os.resetDisplay()
+            os.displayText(appName)
+            os.changedApp = False
+        elif (os.running):
+            appName = os.appNames[os.curApp]
+            os.apps[appName].update()
 
     def onEnter(os):
-        appName = appNames[curApp]
-        apps[appName].device = device
-        apps[appName].init()
-        running = True
+        appName = os.appNames[os.curApp]
+        os.apps[appName].device = os.device
+        os.apps[appName].init()
+        os.running = True
 
     def onEscape(os):
-        if not changedApp:
-            running = False
-            device.clear()
-            displayText("Closing...")
-            changedApp = True
+        if not os.changedApp:
+            os.running = False
+            os.device.clear()
+            os.displayText("Closing...")
+            os.changedApp = True
         
     def resetDisplay(os):
-        device.cleanup()
-        device = get_device()
+        os.device.cleanup()
+        os.device = get_device()
     
 if __name__ == "__main__":
     device = get_device()
     os = OS(device)
-    print(os)
     os.startUp()
     while True:
-        os.main()
+        os.update()
