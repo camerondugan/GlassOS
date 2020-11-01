@@ -32,13 +32,13 @@ def init():
     keyboard.on_press_key("right", lambda _:nextApp())
     keyboard.on_press_key("esc", lambda _:onEscape())
     keyboard.on_press_key("enter", lambda _:onEnter())
-    keyboard.add_hotkey('space', lambda:onEscape())
+    keyboard.add_hotkey('space', lambda :onEscape())
     
 def main():
     global appNames
     global apps
     
-    playCurrent()
+    playCurrentApp()
 
 def displayText(text):
     global device
@@ -93,7 +93,7 @@ def previousApp():
             curApp = len(appNames) - 1
         changedApp = True
     
-def playCurrent():
+def playCurrentApp():
     global curApp
     global changedApp
     
