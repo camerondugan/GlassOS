@@ -28,9 +28,6 @@ class OS:
         keyboard.on_press_key("esc", lambda _:os.onEscape())
         keyboard.on_press_key("enter", lambda _:os.onEnter())
         keyboard.add_hotkey('space', lambda :os.onEscape())
-    
-    def update(os):
-        os.playCurrentApp()
 
     def displayText(os,text):
         os.device.clear()
@@ -78,7 +75,7 @@ class OS:
                 os.curApp = len(os.appNames) - 1
             os.changedApp = True
         
-    def playCurrentApp(os):
+    def update(os):
         if os.changedApp:
             appName = os.appNames[os.curApp]
             os.resetDisplay()
