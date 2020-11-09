@@ -28,6 +28,7 @@ class OS:
         keyboard.on_press_key("esc", lambda _:os.onEscape())
         keyboard.on_press_key("enter", lambda _:os.onEnter())
         keyboard.add_hotkey('space', lambda :os.onEscape())
+        print(os.appNames)
 
     def displayText(os,text):
         os.device.clear()
@@ -105,6 +106,5 @@ class OS:
 if __name__ == "__main__":
     device = get_device()
     os = OS(device)
-    os.startUp()
     while True:
         os.update()
