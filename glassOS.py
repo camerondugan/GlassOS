@@ -28,7 +28,7 @@ class OS:
         keyboard.on_press_key("esc", lambda _:os.onEscape())
         keyboard.on_press_key("enter", lambda _:os.onEnter())
         keyboard.add_hotkey('space', lambda _:os.onEscape())
-        keyboard.add_hotkey('ctrl+c', lambda _:sys.exit())
+        keyboard.add_hotkey('ctrl+c', lambda _:exit())
 
     def displayText(os,text):
         os.device.clear()
