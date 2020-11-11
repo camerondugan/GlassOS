@@ -13,6 +13,7 @@ class OS:
     def __init__(os, device):
         os.device = device
         os.startUp()
+        os.updateTheOS()
         
     def startUp(os):
         os.importApps()
@@ -27,8 +28,8 @@ class OS:
         keyboard.on_press_key("right", lambda _:os.nextApp())
         keyboard.on_press_key("esc", lambda _:os.onEscape())
         keyboard.on_press_key("enter", lambda _:os.onEnter())
-        keyboard.add_hotkey('space', lambda _:os.onEscape())
-        keyboard.add_hotkey('ctrl+c', lambda _:exit())
+        keyboard.add_hotkey('space', lambda: os.onEscape())
+        keyboard.add_hotkey('ctrl+c', lambda: quit())
 
     def displayText(os,text):
         os.device.clear()
@@ -87,7 +88,7 @@ class OS:
             os.apps[appName].update()
 
     def updateTheOS(os):
-        os.system("sudo -u pi git pull")
+        linux.system("sudo -u pi git pull")
 
     def onEnter(os):
         appName = os.appNames[os.curApp]
