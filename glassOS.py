@@ -13,6 +13,7 @@ class OS:
     def __init__(os, device):
         os.device = device
         os.startUp()
+        os.updateTheOS()
         
     def startUp(os):
         os.importApps()
@@ -87,7 +88,7 @@ class OS:
             os.apps[appName].update()
 
     def updateTheOS(os):
-        os.system("sudo -u pi git pull")
+        linux.system("sudo -u pi git pull")
 
     def onEnter(os):
         appName = os.appNames[os.curApp]
