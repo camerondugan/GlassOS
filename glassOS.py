@@ -27,7 +27,8 @@ class OS:
         keyboard.on_press_key("right", lambda _:os.nextApp())
         keyboard.on_press_key("esc", lambda _:os.onEscape())
         keyboard.on_press_key("enter", lambda _:os.onEnter())
-        keyboard.add_hotkey('space', lambda :os.onEscape())
+        keyboard.add_hotkey('space', lambda _:os.onEscape())
+        keyboard.add_hotkey('ctrl+c', lambda _:sys.exit())
         print(os.appNames)
 
     def displayText(os,text):
